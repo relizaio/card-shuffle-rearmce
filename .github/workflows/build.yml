@@ -53,6 +53,7 @@ jobs:
           source_code_sbom_type: npm
           create_component: 'true'
   build-mafia-helm:
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
       id-token: write
@@ -74,6 +75,7 @@ jobs:
           create_component: 'true'
           limit_to_branches: main
   submit-mafia-test-harness:
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: read
       id-token: write
