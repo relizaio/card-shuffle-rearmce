@@ -35,6 +35,16 @@ app.get('/api', function(req, res){
     res.send('<h1>Hello world</h1>');
 });
 
+app.get('/healthz', async function(req, res){
+    let redisUp = false
+    try {
+        redisUp = (await redisClient.ping()) === 'PONG'
+    } catch (err) {
+        console.error('healthz redis ping failed:', err)
+    }
+    res.status(redisUp ? 200 : 503).json({ status: redisUp ? 'ok' : 'degraded', redis: redisUp ? 'up' : 'down' })
+});
+
 io.on('connection', function(socket){
     console.log('a user connected');
 
