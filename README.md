@@ -1,7 +1,7 @@
 # card-shuffle
 
-Demo monorepo for the Mafia card-shuffle game, used to exercise ReARM's
-programmatic feature-set switching and PR-blocking flows.
+Demo monorepo for the Mafia card-shuffle game, wired against a ReARM CE
+instance for the Black Hat 2026 demo.
 
 ## Layout
 
@@ -14,13 +14,15 @@ programmatic feature-set switching and PR-blocking flows.
 ## CI
 
 `.github/workflows/build.yml` runs on every push and submits build
-metadata + SBOMs for all three components. Container images are pushed
-to `registry.test.relizahub.com/a98e122c-3265-43da-b73d-ce21f49c397a-public`
+metadata + SBOMs for all four components to the controlling ReARM CE
+instance at `https://rearmce.rearmhq.com`. Container images are pushed
+to `registry.relizahub.com/d7742f63-c1ef-4ab1-910b-722419180bda-public`
 and the helm chart is OCI-pushed to the same namespace. `create_component`
 is on so the components self-provision on first build.
 
-Both `relizaio/rearm-docker-action` and `relizaio/rearm-helm-action` are
-pinned to `@main` for the duration of this demo.
+Action pins: `relizaio/rearm-docker-action` 1.13.4,
+`relizaio/rearm-helm-action` 1.10.2, `relizaio/rearm-actions` 1.7.0
+(all SHA-pinned in the workflow).
 
 ## Secrets used
 
