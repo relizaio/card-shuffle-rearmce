@@ -17,4 +17,7 @@ LABEL version $VERSION
 
 EXPOSE 3000
 
+# Strip package managers from the runtime image - nothing invokes npm/yarn after build
+RUN rm -rf /usr/local/lib/node_modules /usr/local/bin/npm /usr/local/bin/npx /usr/local/bin/corepack /usr/local/bin/yarn /usr/local/bin/yarnpkg /opt/yarn*
+
 CMD ["node", "index.js"]
